@@ -36,9 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Language management
     function initLanguage() {
+        const params = new URLSearchParams(window.location.search);
+        const urlLang = params.get('lang');
+
         const savedLang = localStorage.getItem('language') || 'ru';
-        // применяем язык сразу, без переходов по страницам
-        changeLanguage(savedLang);
+        const lang = (urlLang && translations[urlLang]) ? urlLang : savedLang;
+
+        changeLanguage(lang);
     }
         
     function changeLanguage(lang) {
